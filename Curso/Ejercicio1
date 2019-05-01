@@ -1,0 +1,114 @@
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import hashes
+from os import system, name
+import hashlib
+########################################################################
+############*****FUNCIONES SECUNDARIAS AL EJERCICIO****#################
+########################################################################
+def pedirNumeroEntero():
+    correcto = False
+    num = 0
+    while (not correcto):
+        try:
+            num = int(input("Introduce un numero entero: "))
+            correcto = True
+        except ValueError:
+            print('Error, introduce un numero entero')
+
+    return num
+
+
+def clear():
+    # for windows
+    if name == 'nt':
+        _ = system('cls')
+
+        # for mac and linux(here, os.name is 'posix')
+    else:
+        _ = system('clear')
+
+
+def ask_user():
+    check = str(input("Desea volver al menú ? (Y/N): ")).lower().strip()
+    try:
+        if check[0] == 'y':
+            return True
+        elif check[0] == 'n':
+            ask_user()
+        else:
+            print('Caracter invalido')
+            return ask_user()
+    except Exception as error:
+        print("Porfavor inserte un caracter válido")
+        print(error)
+        return ask_user()
+
+########################################################################
+##################################################################
+############################################################
+
+#EJERCICIOS DE CRIPTOGRAFIA
+
+def Ejercicio1cursoParte1():
+    clear()
+    digest = hashes.Hash(hashes.MD5(), backend=default_backend())
+    digest.update(b"holaaa")
+    d = digest.finalize()
+    # m = hashlib.sha256("aaa");
+    #resultado = 'md5_short: ' + d + " | " + '\n md5: ' + d.hex
+    print("El resultado para no se que es: ")
+    print(d)
+
+def Ejercicio1Parte1():
+    clear()
+    hash_string = 'Estamos aplicando de forma práctica los conocimientos de criptografia'
+    String1="El resultado en hash256 es el siguiente: \n"
+    hash = hashlib.sha256(hash_string.encode()).hexdigest()
+    return hash
+
+def Ejercicio2Parte1():
+    clear()
+    hash_string = 'criptografia'
+    String1="El resultado en hash256 es el siguiente: \n"
+    hash = hashlib.sha256(hash_string.encode()).hexdigest()
+    return hash
+
+
+
+
+salir = False
+opcion = 0
+
+while not salir:
+    print("******************************************\n***********APARTADO NUMERO 1**************\n******************************************")
+    print("1. Calcula el hash SHA-256 de «Estamos aplicando de forma práctica los conocimientos de criptografia»")
+    print("2. Calcula el hash SHA-256 de «criptografia». Ten en cuenta no incluir tildes en el texto y muestra el resultado en hexadecimal.")
+    print("3. Los textos anteriores tienen diferente longitud, ¿qué sucede con la longitud de los hashes de ambos mensajes?")
+    print("4. Calcula el hash SHA-256 de «criptografio». Ten en cuenta no incluir tildes en el texto y muestra el resultado en hexadecimal.")
+    print("5. Compara el resultado obtenido en b) y d). El texto solo varía en un carácter, ¿cómo afecta esto al resultado de los hashes obtenidos?")
+    print("6. Utilizando la librería cryptography de Python calcula el hash MD5 del fichero «TransacciónBitcoin.txt».")
+    print("7. Salir")
+
+    print("Elige una opcion")
+
+    opcion = pedirNumeroEntero()
+
+    if opcion == 1:
+        print(Ejercicio1Parte1())
+        ask_user()
+    elif opcion == 2:
+        print("Opcion 2")
+    elif opcion == 3:
+        print("Opcion 3")
+    elif opcion == 4:
+        print("Opcion 3")
+    elif opcion == 5:
+        print("Opcion 3")
+    elif opcion == 6:
+        print("Opcion 3")
+    elif opcion == 7:
+        salir = True
+    else:
+        print("Introduce un numero entre 1 y 3")
+
+print("Fin")
